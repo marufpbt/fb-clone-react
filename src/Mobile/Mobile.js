@@ -1,6 +1,7 @@
 import React from 'react';
 import fbandroid from '../images/fbandroid.png';
 import fblogo from '../images/fblogo.png';
+import { useForm } from "react-hook-form";
 
 const Mobile = () => {
 	const { register, handleSubmit, watch, errors } = useForm();
